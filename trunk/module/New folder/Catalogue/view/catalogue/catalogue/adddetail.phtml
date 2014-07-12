@@ -1,0 +1,65 @@
+<?php
+$title = 'Add New Mzimg Detail';
+$this->headTitle($title);
+
+//echo 'Idmazinge';
+//var_dump($this->id);
+
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<table class="table">
+    <tr>
+        <th>
+          <a href="">Title</a> 
+        </th>
+        <th>
+          <a href="">description </a>  
+        </th>
+        <th>
+          <a href="">Thumbnail</a>  
+        </th>
+        
+        <th><a href="">Action</a></th>
+    </tr>
+    <?php foreach ($paginatorimg as $key =>$mzimg) : ?>
+        <tr>
+            <td><?php echo $this->escapeHtml($mzimg['title']); ?></td>
+            <td><?php echo $this->escapeHtml($mzimg['description']); ?></td>
+            <td><img src="<?php echo WEB_PATH_IMG.'/';?><?php echo $this->escapeHtml($mzimg['img']); ?>" style="width: 100px; height:100px;"/></td>
+            <td>
+                <a href="<?php echo $this->url('mzimg', array('action' => 'edit', 'id' => $mzimg['id']));
+        ?>">Edit</a> |
+                <a href="<?php echo $this->url('mzimg', array('action' => 'delete', 'id' => $mzimg['id']));
+        ?>">Delete</a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</table>
+
+<?php
+//    echo $this->paginationControl(
+//            $paginatorimg, 'Sliding', 'page-mzimg', array('order_by' => $order_by, 'order' => $order)
+//    );
+    ?>
+
+    
+    
+<?php
+$form = $this->form;
+//$form->prepare();
+$form->setAttribute('action', $this->url('catalogue', array('action' => 'adddetail')));
+$form->prepare();
+
+echo $this->form()->openTag($form) . PHP_EOL;
+echo $this->formHidden($form->get('id')) . PHP_EOL;
+//echo $this->formRow($form->get('idmz')) . PHP_EOL;
+echo $this->formRow($form->get('cataloguemagazine')) . PHP_EOL;
+echo $this->formRow($form->get('img')) . PHP_EOL;
+echo $this->formRow($form->get('description')) . PHP_EOL;
+echo $this->formRow($form->get('title')) . PHP_EOL;
+echo $this->formRow($form->get('page')) . PHP_EOL;
+//echo $this->formRow($form->get('date')) . PHP_EOL;
+echo $this->formInput($form->get('submit')) . PHP_EOL;
+echo $this->form()->closeTag($form) . PHP_EOL;
+    
+

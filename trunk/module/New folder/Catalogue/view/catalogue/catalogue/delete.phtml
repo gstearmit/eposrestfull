@@ -1,0 +1,18 @@
+<?php
+$title = 'Delete catalogue';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<p>Are you sure that you want to delete Catalogue Name is : <span style="font-style: bold;">'<?php echo $this->escapeHtml($catalogue->title); ?>' </span>?
+</p>
+<h4>Note: If you delete this list, it will affect the list containing it. Or do you think more carefully before deleting</h4>
+<?php 
+$url = $this->url('catalogue', array('action' => 'delete', 'id'=>$this->id)); ?>
+<form action="<?php echo $url; ?>" method="post">
+<div>
+  <input type="hidden" name="id" value="<?php echo (int)$catalogue->id; ?>" />
+  <input type="submit" name="del" value="Yes" class="btn btn-primary" />
+  <input type="submit" name="del" value="No" class="btn btn-primary" />
+</div>
+</form>

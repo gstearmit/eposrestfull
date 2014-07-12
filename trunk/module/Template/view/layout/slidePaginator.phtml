@@ -1,0 +1,20 @@
+
+<?php if ($this->pageCount): ?>
+<div class="pagination-wrapper">
+	<ul class="pagination">
+	    <li <?php echo!isset($this->previous) ? 'class="disabled"' : ''; ?>><a href="<?php echo $this->url('template', array('page' => $this->first, 'order_by' => $order_by, 'order' => $order,)); ?>"><span class='pagevie'><<</span></a></li>
+		<li <?php echo!isset($this->previous) ? 'class="disabled"' : ''; ?>> <a href="<?php echo $this->url('template', array('page' => $this->previous, 'order_by' => $order_by, 'order' => $order,)); ?>"><span>Prev</span></a></li>
+		<!-- Numbered page links -->
+            <?php foreach ($this->pagesInRange as $page): ?>
+                <li <?php echo $page == $this->current ? 'class="active"' : ''; ?>>
+	                <a 	href="<?php echo $this->url('template', array('page' => $page, 'order_by' => $order_by, 'order' => $order,)); ?>">
+	                        <?php echo $page; ?>
+	                 </a>
+                 </li>
+            <?php endforeach; ?>
+		<li> <a href="<?php echo $this->url('template', array('page' => $this->next, 'order_by' => $order_by, 'order' => $order,)); ?>">Next</a></li>
+		<li <?php echo!isset($this->next) ? 'class="disabled"' : ''; ?>><a href="<?php echo $this->url('template', array( 'page' => $this->last, 'order_by' => $order_by, 'order' => $order,)); ?>"><span class='pagevie'>>></span></a></li>
+	</ul>
+</div>
+<!-- end pagination-wrapper -->
+<?php endif; ?>

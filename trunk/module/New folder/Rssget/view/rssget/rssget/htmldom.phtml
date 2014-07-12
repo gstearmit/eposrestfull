@@ -1,0 +1,96 @@
+<?php 
+
+$html = ' 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" dir="ltr"> 
+<head> 
+<title>PHPRO.ORG</title> 
+</head> 
+<body> 
+<h2>Forecast for Saturday</h2> 
+<!-- Issued at 0828 UTC Friday 23 May 2008 --> 
+<table border="0" summary="Capital Cities Precis Forecast"> 
+   <tbody> 
+      <tr> 
+         <td><a href="/products/IDN10064.shtml" title="Link to Sydney forecast">Sydney</a></td> 
+         <td title="Maximum temperature in degrees Celsius" class="max alignright">19&deg;</td> 
+         <td>Fine. Mostly sunny.</td> 
+      </tr> 
+
+      <tr> 
+         <td><a href="/products/IDV10450.shtml" title="Link to Melbourne forecast">Melbourne</a></td> 
+         <td title="Maximum temperature in degrees Celsius" class="max alignright">16&deg;</td> 
+         <td>Fog then fine.</td> 
+      </tr> 
+
+      <tr> 
+         <td><a href="/products/IDQ10095.shtml" title="Link to Brisbane forecast">Brisbane</a></td> 
+         <td title="Maximum temperature in degrees Celsius" class="max alignright">24&deg;</td> 
+         <td>Mostly fine</td> 
+      </tr> 
+
+      <tr> 
+         <td><a href="/products/IDW12300.shtml" title="Link to Perth forecast">Perth</a></td> 
+         <td title="Maximum temperature in degrees Celsius" class="max alignright">21&deg;</td> 
+         <td>Few showers, increasing later.</td> 
+      </tr> 
+
+      <tr> 
+         <td><a href="/products/IDS10034.shtml" title="Link to Adelaide forecast">Adelaide</a></td> 
+         <td title="Maximum temperature in degrees Celsius" class="max alignright">20&deg;</td> 
+         <td>Fine. Mostly sunny.</td> 
+      </tr> 
+
+      <tr> 
+         <td><a href="/products/IDT65061.shtml" title="Link to Hobart forecast">Hobart</a></td> 
+         <td title="Maximum temperature in degrees Celsius" class="max alignright">13&deg;</td> 
+         <td>Mainly fine.</td> 
+      </tr> 
+
+      <tr> 
+         <td><a href="/products/IDN10035.shtml" title="Link to Canberra forecast">Canberra</a></td> 
+         <td title="Maximum temperature in degrees Celsius" class="max alignright">15&deg;</td> 
+         <td>Fine, mostly sunny.</td> 
+      </tr> 
+
+      <tr> 
+         <td><a href="/products/IDD10150.shtml" title="Link to Darwin forecast">Darwin</a></td> 
+         <td title="Maximum temperature in degrees Celsius" class="max alignright">32&deg;</td> 
+         <td>Fine and sunny.</td> 
+      </tr> 
+
+   </tbody> 
+</table> 
+
+</body> 
+</html> 
+'; 
+
+    /*** a new dom object ***/ 
+    $dom = new domDocument; 
+
+    /*** load the html into the object ***/ 
+    $dom->loadHTML($html); 
+
+    /*** discard white space ***/ 
+    $dom->preserveWhiteSpace = false; 
+
+    /*** the table by its tag name ***/ 
+    $tables = $dom->getElementsByTagName('table'); 
+
+    /*** get all rows from the table ***/ 
+    $rows = $tables->item(0)->getElementsByTagName('tr'); 
+
+    /*** loop over the table rows ***/ 
+    foreach ($rows as $row) 
+    { 
+        /*** get each column by tag name ***/ 
+        $cols = $row->getElementsByTagName('td'); 
+        /*** echo the values ***/ 
+        echo $cols->item(0)->nodeValue.'<br />'; 
+        echo $cols->item(1)->nodeValue.'<br />'; 
+        echo $cols->item(2)->nodeValue; 
+        echo '<hr />'; 
+    } 
+?>

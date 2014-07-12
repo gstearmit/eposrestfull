@@ -1,0 +1,244 @@
+<?php echo $this->doctype(); ?>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+    <?php echo $this->headTitle('_'. $this->translate('Play Boy viet'))->setSeparator(' - ')->setAutoEscape(false)?>
+
+    <?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0')?>
+
+    <!-- Le styles -->
+    <?php
+				
+echo $this->headLink ( array (
+						'rel' => 'shortcut icon',
+						'type' => 'image/vnd.microsoft.icon',
+						'href' => $this->basePath () . '/images/favicon.ico' 
+				) )->appendStylesheet ( $this->basePath () . '/css/bootstrap.min.css' )->
+				// ->appendStylesheet($this->basePath() . '/css/bootstrap.css')
+				// ->appendStylesheet($this->basePath() . '/css/bootstrap-theme.css')
+				appendStylesheet ( $this->basePath () . '/css/style.css' )->appendStylesheet ( $this->basePath () . '/css/bootstrap-responsive.min.css' )->appendStylesheet ( $this->basePath () . '/css/magazine.css' )?>
+                    
+   
+
+    <!-- Scripts -->
+    <?php
+				
+echo $this->headScript ()->appendFile ( $this->basePath () . '/js/html5.js', 'text/javascript', array (
+						'conditional' => 'lt IE 9' 
+				) )->appendFile ( $this->basePath () . '/js/jquery.min.js' )->appendFile ( $this->basePath () . '/js/bootstrap.js' )->appendFile ( $this->basePath () . '/js/bootstrap-alert.js' );
+				?>
+                                  
+                                  
+  <script type="text/javascript" language="javascript">
+	$(document).ready(function() {	
+		
+		
+		$("#loadingRT").hide();
+		$("#loading").hide();
+		$("#loading1").hide();
+		 $("#circle1").hide();// hidden load ajax
+		 $(".alert").hide();
+		 setInterval(function(){
+				$('.alert').delay(1000).fadeOut("slow")
+				},1000);
+			
+		
+		$("#thumbnail img").hover(function(e){
+			$("#large").css("top",(e.pageY+5)+"px")
+							 .css("left",(e.pageX+5)+"px")					
+							 .html("<img src="+ $(this).attr("alt") +" alt='Large Image' /><br/>"+$(this).attr("rel"))
+							 .fadeIn("slow");
+		}, function(){
+			$("#large").fadeOut("fast");
+		});		
+
+		
+		
+	});
+</script>
+<style>
+img {
+	border: none;
+}
+
+#thumbnail img {
+	cursor: pointer;
+}
+
+#large {
+	display: none;
+	position: absolute;
+	color: #FFFFFF;
+	background: #333333;
+	padding: 5px;
+}
+</style>
+
+</head>
+
+<body>
+
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="btn btn-navbar" data-toggle="collapse"
+					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span>
+				</a> <a class="brand" href="<?php echo $this->url('home') ?>"><?php echo $this->translate('PlayBoy Viet') ?></a>
+				<div class="nav-collapse">
+					<ul class="nav">
+						<li class="active"><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
+						<li class="noactive"><a
+							href="<?php echo $this->url('igirlxinhcom') ?>"><?php echo $this->translate('Hot girl') ?></a>
+					    </li>
+					    
+					    <li class="noactive"><a
+							href="<?php echo WEB_PATH ; ?>/igirlxinhcom/hotnewgirl"><?php echo $this->translate('New hotgirl') ?></a>
+					    </li>
+						<?php /*
+						
+						 
+						<li class="noactive"><a
+							href="<?php echo $this->url('catalogue') ?>"><?php echo $this->translate('Catalogue') ?></a>
+					    </li>
+						<li class="noactive">
+						   <div class="dropdown">
+							  <button class="btn dropdown-toggle sr-only" type="button" id="dropdownMenuMagazine" data-toggle="dropdown">
+							   Magazinepublish
+							    <span class="caret"></span>
+							  </button>
+							  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuMagazine">
+							    <li class="noactive"><a href="<?php echo $this->url('magazinepublish') ?>"><?php echo $this->translate('Magazinepublish') ?></a></li>
+						        <li class="noactive"><a href="<?php echo $this->url('mzimg') ?>"><?php echo $this->translate('Mzimg') ?></a></li>
+						
+							  </ul>
+							</div>
+						</li>
+						
+						
+						<li class="noactive">
+						   <div class="dropdown">
+							  <button class="btn dropdown-toggle sr-only" type="button" id="dropdownMenuStory" data-toggle="dropdown">
+							   Story
+							    <span class="caret"></span>
+							  </button>
+							  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuStory">
+									<li class="noactive"><a
+										href="<?php echo $this->url('manastory') ?>"><?php echo $this->translate('Story') ?></a></li>
+									<li class="noactive"><a
+										href="<?php echo $this->url('storydetail') ?>"><?php echo $this->translate('Story detail') ?></a></li>
+							  </ul>
+							</div>
+						</li>
+						
+						<li class="noactive">
+						   <div class="dropdown">
+							  <button class="btn dropdown-toggle sr-only" type="button" id="dropdownMenuMagazinevn" data-toggle="dropdown">
+							   Magazinevn
+							    <span class="caret"></span>
+							  </button>
+							  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuMagazinevn">
+									<li class="noactive"><a
+										href="<?php echo $this->url('magazinevietnam') ?>"><?php echo $this->translate('Magazinevn') ?>
+									</a></li>
+									<li class="noactive"><a
+										href="<?php echo $this->url('mgvndetail') ?>"><?php echo $this->translate('Mgvn detail') ?>
+									</a></li>
+						
+							  </ul>
+							</div>
+						</li>
+						
+						<li class="noactive">
+						   <div class="dropdown">
+							  <button class="btn dropdown-toggle sr-only" type="button" id="dropdownMenuLibrarybooks" data-toggle="dropdown">
+							   Librarybooks
+							    <span class="caret"></span>
+							  </button>
+							  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuLibrarybooks">
+								<li class="noactive"><a
+									href="<?php echo $this->url('librarybooks') ?>"><?php echo $this->translate('Librarybooks') ?>
+								</a></li>
+								<li class="noactive"><a
+									href="<?php echo $this->url('librarydetail') ?>"><?php echo $this->translate('Librarydetail') ?>
+								</a></li>
+						
+						  </ul>
+							</div>
+						</li>
+						
+						
+						
+						
+		                <li class="noactive">
+							<div class="dropdown">
+							  <button class="btn dropdown-toggle sr-only" type="button" id="dropdownMenu1" data-toggle="dropdown">
+							   <?php echo $this->translate('news') ?>
+							    <span class="caret"></span>
+							  </button>
+							  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+							    <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo $this->url('news') ?>"><?php echo $this->translate('news') ?></a></li>
+							    <!-- 
+							    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+							    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+							    <li role="presentation" class="divider"></li>
+							    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+							    -->
+							  </ul>
+							</div>
+						  </a></li>
+						  
+						 
+						 
+						 
+						*/?>
+						  
+						  	<li class="noactive">
+						   <div class="dropdown">
+							  <button class="btn dropdown-toggle sr-only" type="button" id="dropdownMenuLibrarybooks" data-toggle="dropdown">
+							   Upload Modul
+							    <span class="caret"></span>
+							  </button>
+							  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuLibrarybooks">
+								 <li class="noactive"><a href="<?php echo $this->url('upload') ?>"><?php echo $this->translate('Upload One library') ?></a></li>
+								<li class="noactive"><a
+									href="<?php echo $this->url('uploadmagazine') ?>"><?php echo $this->translate('Uploadmagazine') ?>
+								</a></li>
+								
+								<li class="noactive"><a
+									href="<?php echo $this->url('uploadstory') ?>"><?php echo $this->translate('Uploadstory') ?>
+								</a></li>
+								
+								<li class="noactive"><a
+									href="<?php echo $this->url('uploadmagazinevietnam') ?>"><?php echo $this->translate('Uploadmagazinevietnam') ?>
+								</a></li>
+								
+								<li class="noactive"><a
+									href="<?php echo $this->url('uploadlibrarybooks') ?>"><?php echo $this->translate('Uploadlibrarybooks') ?>
+								</a></li>
+						
+						  </ul>
+							</div>
+						</li>
+					</ul>
+
+				</div>
+				<!--/.nav-collapse -->
+
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+
+      <?php echo $this->content; ?>
+
+      <hr>
+
+		<footer> </footer>
+
+	</div>
+	<!-- /container -->
+
+</body>
+</html>

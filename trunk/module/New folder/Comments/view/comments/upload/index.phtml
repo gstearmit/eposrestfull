@@ -1,0 +1,26 @@
+
+<h1>Upload File</h1>
+<?php 
+$form = $this->form;
+$form->prepare();
+?>
+
+
+<?php echo $this->form()->openTag($form);?>
+
+<ul>
+	<li>
+		
+		<span><?php echo $this->formLabel($form->get('picture')); ?></span>
+		
+		
+		<?php echo $this->formElement($form->get('picture')); ?>
+	</li>
+	<li>
+		
+		<?php echo $this->formElement($form->get('submit'));?>
+	</li>
+</ul>
+
+
+<?php echo $this->form()->closeTag() ?>

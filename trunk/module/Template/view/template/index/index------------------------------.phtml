@@ -1,0 +1,72 @@
+<?php 
+	$templateURL = $this->basePath('/Page_Bottom_Issus/');
+	$basepathview = WEB_PATH.$templateURL;
+// 	var_dump($girlxinh);//die;
+// 	var_dump($basepathview);
+?>
+
+
+ <div class="portfolio-wrapper">
+    <?php foreach (igirlxinhcoms as $template) :
+          // if($template->image_thumbnail != '') {
+      ?>
+ 
+            <div class="card <?php if($template->title == 'igirlxinhcom') {print 'Hot girl';} else {print "phototamtayvn";} ?> art">
+              <a  href="#" class="thumb">
+              <?php   if($template->image_thumbnail != '') {?>
+                <img src="<?php echo $template->image_thumbnail;  ?>" alt="" title="<?php echo $this->escapeHtml($template->title); ?>" />
+                <?php }else { ?>
+                    <img src="<?php echo $basepathview; ?>img/sample/elephants-dream/imgdefault.jpg" alt="" title="" />
+                <?php }?>
+                <span class="overlay"><span class="fa fa-search"></span></span>
+              </a>
+              <div class="card-body">
+                <h2><a  href="#"><?php echo $this->escapeHtml($template->content_detail); ?></a></h2>
+                <p><?php echo $this->escapeHtml($template->title); ?></p>
+                <p><a  href="#">Read More</a></p>
+              </div><!-- end card-body -->
+              <div class="card-footer">
+                <ul class="list-inline filters">
+                  <li><a  href="#none"> <?php if($template->title == 'igirlxinhcom') {print 'Hot girl';} else {print "phototamtayvn";} ?></a></li>
+                  <li><a  href="#none">Art</a></li>
+                </ul>
+              </div><!-- end card-footer -->
+            </div><!-- end card -->
+            
+            
+      <?php //}
+       endforeach; ?>   
+         
+      
+            
+            
+            <?php /*?>
+            <div class="card music social">
+              <a  href="#" class="thumb">
+                <img src="<?php echo $basepathview; ?>img/sample/elephants-dream/sample-elephants-1.jpg" alt="" title="" />
+                <span class="overlay"><span class="fa fa-search"></span></span>
+              </a>
+              <div class="card-body">
+                <h2><a  href="#">Elephants Dream</a></h2>
+                <p>Elephants Dream is the world’s first open movie, made entirely with open source graphics software such as Blender , and with all production ...</p>
+                <p><a  href="#">Read More</a></p>
+              </div><!-- end card-body -->
+              <div class="card-footer">
+                <ul class="list-inline filters">
+                  <li><a  href="#none">Music</a></li>
+                  <li><a  href="#none">Social</a></li>
+                </ul>
+              </div><!-- end card-footer -->
+            </div><!-- end card -->
+            
+            */?>
+     
+  </div><!-- end portfolio-wrapper -->
+  
+   <?php
+//    echo $this->paginationControl(
+//            $paginator, 'Sliding', 'page-template', array('order_by' => $order_by, 'order' => $order , 'search_by' => $search_by, 'pageAction' => $pageAction)
+//    );
+
+
+    ?>     

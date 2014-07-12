@@ -1,0 +1,41 @@
+<?php 
+	$templateURL = $this->basePath('/templates/hairstyle/');
+?>
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="<?php echo $templateURL;?>css/style.css" type="text/css">
+</head>
+<body>
+	
+	<div id="header">
+		<div class="section">
+			<div class="logo">
+				<a href="index.html">zizurz</a>
+			</div>
+			<?php require_once 'menu.php';?>
+		</div>
+		<?php
+			//if($this->layout()->getChildren()[0]->getTemplate() == 'template/index/index'){
+			//	require_once 'banner.php';
+			//}
+		?>
+	</div>
+	<?php echo $this->content; ?>
+	<div id="footer">
+		<div>
+			<div class="connect">
+				<a href="http://freewebsitetemplates.com/go/twitter/" id="twitter">twitter</a>
+				<a href="http://freewebsitetemplates.com/go/facebook/" id="facebook">facebook</a>
+				<a href="http://freewebsitetemplates.com/go/googleplus/" id="googleplus">googleplus</a>
+				<a href="http://pinterest.com/fwtemplates/" id="pinterest">pinterest</a>
+			</div>
+			<p>
+				&copy; copyright 2023 | all rights reserved.
+			</p>
+		</div>
+	</div>
+</body>
+</html>

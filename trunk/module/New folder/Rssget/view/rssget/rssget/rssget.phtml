@@ -1,0 +1,25 @@
+<?php
+// echo '<pre>';
+// print_r ( $this->channel );
+// echo '</pre>';
+?>
+
+<div id="rss">
+<?php
+$arrayRss = $this->channel['items'];
+
+// echo '<pre>';
+// print_r ( $this->channel['items']);
+// echo '</pre>';
+
+foreach ($arrayRss as $key => $value)
+{?>
+<div class="entry">
+<h2 class="postTitle"> <a href="<?php echo $value['link'];?>"><?php echo $value['title']; ?></a> </h2>
+<!--  <em class="date">Sat, 14 Jun 2014 16:00:39 +0000</em> --> 
+  <p class="description"><?php echo $value['description']; ?></p>
+   <img src="<?php echo $value['image']?>" alt="image" style="width: 200px;height:200px;"> 
+     <a href="<?php echo $value['link'];?>" target="_blank">Read More &gt;&gt;</a>
+</div>
+<?php }?>
+</div>

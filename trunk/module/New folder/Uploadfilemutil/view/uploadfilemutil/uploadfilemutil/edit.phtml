@@ -1,0 +1,21 @@
+<?php
+$title = 'Edit magazinepublish';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<?php
+$form = $this->form;
+$form->setAttribute('action', 
+    $this->url('magazinepublish', array('action' => 'edit', 'id'=>$this->id)));
+$form->prepare();
+
+echo $this->form()->openTag($form) . PHP_EOL;
+echo $this->formHidden($form->get('id')) . PHP_EOL;
+echo $this->formRow($form->get('title')) . PHP_EOL;
+echo $this->formRow($form->get('descriptionkey')) . PHP_EOL;
+echo $this->formRow($form->get('imgkey')) . PHP_EOL;
+//echo $this->formRow($form->get('idmzalbum')) . PHP_EOL;
+echo $this->formInput($form->get('submit')) . PHP_EOL;
+echo $this->form()->closeTag($form) . PHP_EOL;
+

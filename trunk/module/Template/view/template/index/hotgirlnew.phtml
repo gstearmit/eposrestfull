@@ -1,0 +1,47 @@
+<?php 
+//     	    	echo "<pre>";
+//     	    	print_r($phototamtay);
+//     	    	echo '</pre>';
+//     	    	die;
+?>
+<div class="portfolio-wrapper">
+    <?php foreach ($phototamtay as $key => $template) :
+         if($template['image_thumbnail'] != '') {
+      ?>
+ 
+            <div class="card <?php if($template['title'] == 'igirlxinhcom') {print 'igirlxinhcom';} else {print "phototamtayvn";} ?> art">
+              <a  href="<?php echo WEB_PATH. '/template/detail/'.$template['id'] ?>" class="thumb">
+              <?php   if($template['image_thumbnail'] != '') {?>
+                <img src="<?php echo $template['image_thumbnail'];  ?>" alt="" title="<?php echo $this->escapeHtml($template['title']); ?>" />
+                <?php }else { ?>
+                    <img src="<?php echo Page_Bottom_Issus_img; ?>/img/sample/elephants-dream/imgdefault.jpg" alt="" title="" />
+                <?php }?>
+                <span class="overlay"><span class="fa fa-search"></span></span>
+              </a>
+              <div class="card-body">
+                <h2><a  href="<?php echo WEB_PATH. '/template/detail/'.$template['id'] ?>"><?php echo $this->escapeHtml($template['content_detail']); ?></a></h2>
+                <p><?php //echo $this->escapeHtml($template['title']); ?></p>
+                <p><a  href="<?php echo WEB_PATH. '/template/detail/'.$template['id'] ?>">Read More</a></p>
+              </div><!-- end card-body -->
+              <div class="card-footer">
+                <ul class="list-inline filters">
+                  <li><a  href="#none"> <?php if($template['title'] == 'igirlxinhcom') {print 'Hot girl';} else {print "Hot Girl New";} ?></a></li>
+                  <li><a  href="#none">Art</a></li>
+                </ul>
+              </div><!-- end card-footer -->
+            </div><!-- end card -->
+         
+      <?php }
+       endforeach; ?>   
+         
+      
+     
+  </div><!-- end portfolio-wrapper -->
+  
+   <?php
+//    echo $this->paginationControl(
+//            $paginator, 'Sliding', 'page-template', array('order_by' => $order_by, 'order' => $order , 'search_by' => $search_by, 'pageAction' => $pageAction)
+//    );
+
+
+    ?> 

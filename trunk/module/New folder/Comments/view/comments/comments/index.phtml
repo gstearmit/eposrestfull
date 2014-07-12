@@ -1,0 +1,104 @@
+<?php
+$title = 'My comments';
+$this->headTitle($title);
+$url_order = 'ASC';
+if ($order_by == 'title')
+    $url_order = $order == 'ASC' ? 'DESC' : 'ASC';
+elseif ($order_by == 'description')
+    $url_order = $order == 'ASC' ? 'DESC' : 'ASC';
+?>
+
+<?php
+$form  = $this->form;
+$form->setAttribute('action', $this->url('comments', array('action' => 'search')));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+foreach ($form as $element) :
+    ?>
+    <div class="control-group <?php if ($this->formElementErrors($element)) echo "error" ?>">
+        <label class="control-label"><?php echo $element->getLabel() ?></label>
+        <div class="controls">
+            <?php
+            echo $this->formElement($element);
+            if ($this->formElementErrors($element)):
+                ?>
+                <span class="help-inline"><?php echo $this->formElementErrors($element); ?></span>
+                <?php
+            endif;
+            ?>
+        </div>
+    </div>
+    <?php
+endforeach;
+echo $this->form()->closeTag();
+?>
+
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<p><a class="btn "  href="<?php echo $this->url('comments', array( 'action' => 'add')); ?>">Add new comments</a></p>
+
+
+
+
+<table class="table">
+    <tr>
+        <th>
+        STT
+        </th>
+        <th>
+            <a href="<?php echo $this->url('comments', array('order_by' => 'title', 'order' => $url_order, 'search_by' => $search_by)); ?>">Title <?php if ($order_by == 'title'): ?><i class="icon-chevron-<?php echo $url_order == 'ASC' ? 'down' : 'up' ?>"></i><?php endif; ?></a>
+        </th>
+        <th>
+            <a href="<?php echo $this->url('comments', array('order_by' => 'name', 'order' => $url_order, 'search_by' => $search_by)); ?>">Name <?php if ($order_by == 'name'): ?><i class="icon-chevron-<?php echo $url_order == 'ASC' ? 'down' : 'up' ?>"></i><?php endif; ?></a>
+        </th>
+        <th>
+            <a href="<?php echo $this->url('comments', array('order_by' => 'img', 'order' => $url_order, 'search_by' => $search_by)); ?>">Thumbnail <?php if ($order_by == 'img'): ?><i class="icon-chevron-<?php echo $url_order == 'ASC' ? 'down' : 'up' ?>"></i><?php endif; ?></a>
+        </th>
+         <th>
+            <a href="<?php echo $this->url('comments', array('order_by' => 'content', 'order' => $url_order,'search_by' => $search_by)); ?>">Content <?php if ($order_by == 'content'): ?><i class="icon-chevron-<?php echo $url_order == 'ASC' ? 'down' : 'up' ?>"></i><?php endif; ?></a>
+        </th>
+        
+        <th><a href="">Action</a></th>
+    </tr>
+    <?php foreach ($paginatorimg as $comments) : ?>
+        <tr>
+            <td><?php echo $this->escapeHtml($comments->id); ?></td>
+            <td><?php echo $this->escapeHtml($comments->title); ?></td>
+            <td><div><?php echo $comments->description; ?></div></td>                 
+            <td> <div id="thumbnail" > <img  src="<?php echo WEB_PATH_IMG.'/';?><?php echo $this->escapeHtml($comments->img); ?>" style="width: 100px; height:100px;"/><p id="large"></p></div></td>
+            <td><?php if($comments->email !== '') { ?><div><?php echo $comments->eamil; ?></div><?php }?></td>
+            
+            <td>
+            <!--  
+                <a class="btn " href="<?php echo $this->url('comments', array('action' => 'edit', 'id' => $comments->id));
+        ?>">Edit</a> 
+            -->
+                <a class="btn" href="<?php echo $this->url('comments', array('action' => 'delete', 'id' => $comments->id));
+        ?>">Delete</a>
+              
+                  <?php
+                    $delurl = $this->url('comments', array (
+                        'action' => 'delete',
+                        'id'     => $comments->id,
+                    ));
+                    ?>
+                <!--    <div style="display: none;">
+                        <form action="<?php echo $delurl; ?>" method="post" id="post_<?php echo $comments->id; ?>" name="post_<?php echo $comments->id; ?>">
+                            <input type="hidden" name="id" value="<?php echo (int) $comments->id; ?>" />
+                        </form>
+                    </div>
+                    <a onclick="if (confirm('Are you sure you want to delete <?php echo $comments->id; ?>?')) {document.<?php echo "post_" . $comments->id; ?>.submit();} event.returnValue = false; return false;" href="#" class="btn btn-mini edit-row">Delete</a>
+               -->  
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</table>
+
+
+<?php
+   echo $this->paginationControl(
+           $paginatorimg, 'Sliding', 'page-comments', array('order_by' => $order_by, 'order' => $order , 'search_by' => $search_by, 'pageAction' => $pageAction)
+   );
+
+
+    ?>

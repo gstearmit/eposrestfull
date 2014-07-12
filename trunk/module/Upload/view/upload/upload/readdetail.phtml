@@ -1,0 +1,29 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<?php
+// echo '<pre>';
+// print_r($this->readdetail) ;
+// echo '</pre>';
+
+?>
+
+
+<?php
+// header('Content-Type: text/html;charset=UTF-8');
+// var_dump('1111111111111');
+if (is_array($this->readdetail) and !empty($this->readdetail))
+ {
+	foreach ($this->readdetail as $new)
+	{
+        ?>
+        <h1><?php echo $new['title'];?></h1>
+        <div><img alt="" src="<?php echo WEB_PATH_IMG.'/'.$new['img'];?>"></div>
+		<p><strong><?php echo $new['description'];?></strong></p>
+		<div style="display: none;"><?php echo $new['page'];?></div>
+		<?php
+	}
+}else 
+{
+	die("Not Found Record ! ");
+}
+
+?>

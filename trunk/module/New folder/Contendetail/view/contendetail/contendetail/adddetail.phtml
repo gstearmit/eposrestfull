@@ -1,0 +1,101 @@
+<?php
+$title = 'Add New mgvndetail Detail';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+
+<?php
+$form = $this->form;
+//$form->prepare();
+$form->setAttribute('action', $this->url('mgvndetail', array('action' => 'adddetail')));
+$form->prepare();
+
+echo $this->form()->openTag($form) . PHP_EOL;
+echo $this->formHidden($form->get('id')) . PHP_EOL;
+echo $this->formHidden($form->get('idmz')) . PHP_EOL;
+echo $this->formRow($form->get('title')) . PHP_EOL;
+
+echo $this->formRow($form->get('img')) . PHP_EOL;
+
+
+$template_content = $form->get('description');
+$tbl_template_content = $template_content->getOption('label');
+$txt_template_content = $this->formTextarea($template_content);
+
+?>
+<div class="control-group">
+		<label class="control-label" for=""><?php echo $tbl_template_content; //echo $this->translate($tbl_description, 'PerseedApplication');?></label>
+		<div class="controls">
+			<?php echo $txt_template_content ;?>
+		</div>
+	</div>
+	
+<?php 
+
+
+
+echo $this->formRow($form->get('page')) . PHP_EOL;
+//echo $this->formRow($form->get('date')) . PHP_EOL;
+echo $this->formInput($form->get('submit')) . PHP_EOL;
+echo $this->form()->closeTag($form) . PHP_EOL;
+    
+?>
+<?php 
+  
+    if(!empty($paginatorimg))    
+     {?>
+     
+     <table class="table">
+	    <tr>
+	        <th>
+	          <a href="">Title</a> 
+	        </th>
+	        <th>
+	          <a href="">description </a>  
+	        </th>
+	        <th>
+	          <a href="">Thumbnail</a>  
+	        </th>
+	        
+	        <th><a href="">Action</a></th>
+	    </tr>
+     
+     <?php
+     	   foreach ($paginatorimg as $key =>$mgvndetail) : ?>
+     	        <tr>
+     	            <td><?php echo $this->escapeHtml($mgvndetail['title']); ?></td>
+     	            <td><?php echo $this->escapeHtml($mgvndetail['description']); ?></td>
+     	            <td><img src="<?php echo WEB_PATH_IMG.'/';?><?php echo $this->escapeHtml($mgvndetail['img']); ?>" style="width: 100px; height:100px;"/></td>
+     	            <td>
+     	                <a href="<?php echo $this->url('mgvndetail', array('action' => 'edit', 'id' => $mgvndetail['id']));
+     	        ?>">Edit</a> |
+     	                <a href="<?php echo $this->url('mgvndetail', array('action' => 'delete', 'id' => $mgvndetail['id']));
+     	        ?>">Delete</a>
+     	            </td>
+     	        </tr>
+     	    <?php endforeach;  
+  ?>
+   
+    
+     </table>
+
+ <?php      } // end if?>
+
+<?php
+//    echo $this->paginationControl(
+//            $paginatorimg, 'Sliding', 'page-mgvndetail', array('order_by' => $order_by, 'order' => $order)
+//    );
+    ?>
+
+   <script type="text/javascript" src="<?php echo CKEDITOR_PATH;?>"></script>
+<script type="text/javascript">
+	CKEDITOR.replace( 'description', {
+		width: "900px",
+		height: "300px",
+		toolbar: "Full"
+	} );
+</script> 
+    
+
+
