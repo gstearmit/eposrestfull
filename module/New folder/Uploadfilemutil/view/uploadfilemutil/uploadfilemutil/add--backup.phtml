@@ -1,0 +1,99 @@
+<?php
+$title = 'Add new magazinepublish';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('magazinepublish', array('action' => 'add')));
+$form->prepare();
+
+echo $this->form()->openTag($form) . PHP_EOL;
+echo $this->formHidden($form->get('id')) . PHP_EOL;
+echo $this->formRow($form->get('title')) . PHP_EOL;
+echo $this->formRow($form->get('descriptionkey')) . PHP_EOL;
+echo $this->formRow($form->get('imgkey')) . PHP_EOL;
+//+++++++++++++++++++++++++
+
+// Init Form
+$form1 = $this->form1;
+$form1->setAttribute('class', 'form-horizontal');
+$form1->setAttribute('action', $this->url('magazinepublish', array('action' => 'add')));
+//$form1->setAttribute('action', $this->url('fileupload',array('controller' => 'fileupload', 'action' => 'single')));
+$form1->prepare();
+
+// Configure Errors Helper
+$errorsHelper  = $this->plugin('formelementerrors');
+$errorsHelper
+->setMessageOpenFormat('<div class="help-block">')
+->setMessageSeparatorString('</div><div class="help-block">')
+->setMessageCloseString('</div>');
+?>
+<?php echo $this->form()->openTag($form1); ?>
+<fieldset>
+
+    <?php
+    $elem = $form1->get('text');
+    $elem->setLabelAttributes(array('class' => 'control-label'));
+    $errors = $elem->getMessages();
+    $errorClass = (!empty($errors)) ? ' error' : '';
+    ?>
+    <div class="control-group<?php echo $errorClass ?>">
+        <!-- <label class="control-label" for="text">Name magazine</label> -->
+        <?php echo $this->formLabel($elem); ?>
+        <div class="controls">
+            <?php echo $this->formText($elem); ?>
+            <?php echo $errorsHelper($elem); ?>
+        </div>
+    </div>
+
+    <?php
+    // upload file
+    $elem = $form1->get('file');
+    $elem->setLabelAttributes(array('class' => 'control-label'));
+    $errors = $elem->getMessages();
+    $errorClass = (!empty($errors)) ? ' error' : '';
+    ?>
+    <div class="control-group<?php echo $errorClass ?>">
+        <?php echo $this->formLabel($elem); ?>
+        <div class="controls">
+            <?php echo $this->formFile($elem); ?>
+            <?php echo $errorsHelper($elem); ?>
+            <?php if (!empty($this->tempFiles)) { ?>
+                <!--
+                Note: You might not want to render the file input in this
+                case either, depending on your use-case.
+                -->
+                <div class="help-block">
+                    Uploaded: <ul>
+                    <?php foreach ($this->tempFiles as $tempFile) { ?>
+                        <li><?php echo $this->escapeHtml($tempFile['name']) ?></li>
+                    <?php } ?>
+                    </ul>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <div class="controls">
+            <button class="btn btn-primary">Add</button>
+        </div>
+    </div>
+    
+ 
+
+</fieldset>
+<?php echo $this->form()->closeTag($form1); ?>
+
+<?php
+//-------------------------
+
+//echo $this->formInput($form->get('submit')) . PHP_EOL;
+echo $this->form()->closeTag($form) . PHP_EOL;
+?>
+
+
+
+

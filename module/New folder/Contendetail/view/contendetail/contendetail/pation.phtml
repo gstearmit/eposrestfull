@@ -1,0 +1,58 @@
+<?php
+$title = 'My mzimg';
+$this->headTitle($title);
+$url_order = 'ASC';
+if ($order_by == 'title')
+    $url_order = $order == 'ASC' ? 'DESC' : 'ASC';
+elseif ($order_by == 'artist')
+    $url_order = $order == 'ASC' ? 'DESC' : 'ASC';
+?>
+
+
+
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<p><a class="btn "  href="<?php
+echo $this->url('mzimg', array( 'action' => 'add'));
+?>">Add new mzimg</a></p>
+
+
+<table class="table">
+    <tr>
+        <th>
+            <a href="<?php echo $this->url('mzimg', array('order_by' => 'title', 'order' => $url_order)); ?>">Title <?php if ($order_by == 'title'): ?><i class="icon-chevron-<?php echo $url_order == 'ASC' ? 'down' : 'up' ?>"></i><?php endif; ?></a>
+        </th>
+        <th>
+            <a href="<?php echo $this->url('mzimg', array('order_by' => 'description', 'order' => $url_order)); ?>">description <?php if ($order_by == 'description'): ?><i class="icon-chevron-<?php echo $url_order == 'ASC' ? 'down' : 'up' ?>"></i><?php endif; ?></a>
+        </th>
+        <th>
+            <a href="<?php echo $this->url('mzimg', array('order_by' => 'titlemagazinepublish', 'order' => $url_order)); ?>">Magazine  <?php if ($order_by == 'titlemagazinepublish'): ?><i class="icon-chevron-<?php echo $url_order == 'ASC' ? 'down' : 'up' ?>"></i><?php endif; ?></a>
+        </th>
+        <th>
+            <a href="<?php echo $this->url('mzimg', array('order_by' => 'img', 'order' => $url_order)); ?>">Thumbnail <?php if ($order_by == 'img'): ?><i class="icon-chevron-<?php echo $url_order == 'ASC' ? 'down' : 'up' ?>"></i><?php endif; ?></a>
+        </th>
+        
+        <th><a href="">Action</a></th>
+    </tr>
+    <?php foreach ($paginatorimg as $mzimg) :
+    	
+    ?>
+        <tr>
+            <td><?php echo $this->escapeHtml($mzimg['title']); ?></td>
+             <td><?php echo $this->escapeHtml($mzimg['description']); ?></td>
+             <td><?php echo $this->escapeHtml($mzimg['titlemagazinepublish']); ?></td>
+            <td><img src="<?php echo WEB_PATH_IMG.'/';?><?php echo $this->escapeHtml($mzimg['img']); ?>" style="width: 100px; height:100px;"/></td>
+            <td>
+                <a class="btn " href="<?php echo $this->url('mzimg', array('action' => 'edit', 'id' => $mzimg['id']));
+        ?>">Edit</a> 
+                <a class="btn" href="<?php echo $this->url('mzimg', array('action' => 'delete', 'id' => $mzimg['id']));
+        ?>">Delete</a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</table>
+
+<?php
+//    echo $this->paginationControl(
+//            $paginatorimg, 'Sliding', 'page-mzimg', array('order_by' => $order_by, 'order' => $order)
+//    );
+    ?>

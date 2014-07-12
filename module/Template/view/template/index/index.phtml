@@ -1,0 +1,149 @@
+<?php 
+	$templateURL = $this->basePath('/Page_Bottom_Issus/');
+	$basepathview = WEB_PATH.$templateURL;
+// 	var_dump($girlxinh);//die;
+// 	var_dump($basepathview);
+?>
+
+<?php /*
+?>
+<table class="table">
+    <tr>
+        <th>
+            <a href="<?php echo $this->url('template', array('order_by' => 'title', 'order' => $url_order, 'search_by' => $search_by)); ?>">Title <?php if ($order_by == 'title'): ?><i class="icon-chevron-<?php echo $url_order == 'ASC' ? 'down' : 'up' ?>"></i><?php endif; ?></a>
+        </th>
+        <th>
+            <a href="<?php echo $this->url('template', array('order_by' => 'description', 'order' => $url_order, 'search_by' => $search_by)); ?>">description <?php if ($order_by == 'description'): ?><i class="icon-chevron-<?php echo $url_order == 'ASC' ? 'down' : 'up' ?>"></i><?php endif; ?></a>
+        </th>
+        <th>
+            <a href="<?php echo $this->url('template', array('order_by' => 'img', 'order' => $url_order, 'search_by' => $search_by)); ?>">Thumbnail <?php if ($order_by == 'img'): ?><i class="icon-chevron-<?php echo $url_order == 'ASC' ? 'down' : 'up' ?>"></i><?php endif; ?></a>
+        </th>
+        
+          <th>
+            <a href="<?php echo $this->url('template', array('order_by' => 'page', 'order' => $url_order,'search_by' => $search_by)); ?>">Page <?php if ($order_by == 'page'): ?><i class="icon-chevron-<?php echo $url_order == 'ASC' ? 'down' : 'up' ?>"></i><?php endif; ?></a>
+        </th>
+        
+        <th><a href="">Action</a></th>
+    </tr>
+    <?php foreach ($paginator as $template) : ?>
+        <tr>
+            <td><?php echo $this->escapeHtml($template->title); ?></td>
+            <td><div><?php echo $template->description; ?></div></td>
+            <td><img src="<?php echo WEB_PATH_IMG.'/';?><?php echo $this->escapeHtml($template->img); ?>" style="width: 100px; height:100px;"/></td>
+            <td><?php if($template->page !== '') { ?><div>Page : <?php echo $template->page; ?></div><?php }?></td>
+            <td>
+          <!-- 
+                <a class="btn " href="<?php echo $this->url('template', array('action' => 'edit', 'id' => $template->id));
+        ?>">Edit</a> 
+          -->
+                <a class="btn" href="<?php echo $this->url('template', array('action' => 'delete', 'id' => $template->id));
+        ?>">Delete</a>
+              
+                  <?php
+                    $delurl = $this->url('template', array (
+                        'action' => 'delete',
+                        'id'     => $template->id,
+                    ));
+                    ?>
+                <!--    <div style="display: none;">
+                        <form action="<?php echo $delurl; ?>" method="post" id="post_<?php echo $template->id; ?>" name="post_<?php echo $template->id; ?>">
+                            <input type="hidden" name="id" value="<?php echo (int) $template->id; ?>" />
+                        </form>
+                    </div>
+                    <a onclick="if (confirm('Are you sure you want to delete <?php echo $template->id; ?>?')) {document.<?php echo "post_" . $template->id; ?>.submit();} event.returnValue = false; return false;" href="#" class="btn btn-mini edit-row">Delete</a>
+               -->  
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</table>
+*/ ?>
+
+
+
+
+
+
+ <div class="portfolio-wrapper">
+    <?php foreach ($paginator as $template) :
+          // if($template->image_thumbnail != '') {
+      ?>
+ 
+            <div class="card <?php if($template->title == 'igirlxinhcom') {print 'Hot girl';} else {print "Hot Girl New";} ?> art">
+              <a  href="<?php echo WEB_PATH. '/template/detail/'.$template->id ?>" class="thumb">
+              <?php   if($template->image_thumbnail != '') {?>
+                <img src="<?php echo $template->image_thumbnail;  ?>" alt="" title="<?php echo $this->escapeHtml($template->title); ?>" />
+                <?php }else { ?>
+                    <img src="<?php echo $basepathview; ?>img/sample/elephants-dream/imgdefault.jpg" alt="" title="" />
+                <?php }?>
+                <span class="overlay"><span class="fa fa-search"></span></span>
+              </a>
+              <div class="card-body">
+                <h2><a  href="<?php echo WEB_PATH. '/template/detail/'.$template['id'] ?>"><?php echo $this->escapeHtml($template->content_detail); ?></a></h2>
+                <p><?php echo $this->escapeHtml($template->title); ?></p>
+                <p><a  href="<?php echo WEB_PATH. '/template/detail/'.$template->id ?>">Read More</a></p>
+              </div><!-- end card-body -->
+              <div class="card-footer">
+                <ul class="list-inline filters">
+                  <li><a  href="#none"> <?php if($template->title == 'igirlxinhcom') {print 'Hot girl';} else {print "Hot Girl New";} ?></a></li>
+                  <li><a  href="#none">Art</a></li>
+                </ul>
+              </div><!-- end card-footer -->
+            </div><!-- end card -->
+            
+            <div class="card phototamtayvn art">
+              <a  href="<?php echo WEB_PATH. '/template/detail/'.$template->id ?>" class="thumb">
+              <?php if($template->image_thumbnail != '') {?>
+                <img src="<?php echo $template->image_thumbnail;  ?>" alt="" title="<?php echo $this->escapeHtml($template->title); ?>" />
+                <?php }else { ?>
+                    <img src="<?php echo $basepathview; ?>img/sample/elephants-dream/imgdefault.jpg" alt="" title="" />
+                <?php }?>
+                <span class="overlay"><span class="fa fa-search"></span></span>
+              </a>
+              <div class="card-body">
+                <h2><a  href="<?php echo WEB_PATH. '/template/detail/'.$template['id'] ?>"><?php echo $this->escapeHtml($template->content_detail); ?></a></h2>
+                <p><?php echo $this->escapeHtml($template->title); ?></p>
+                <p><a  href="<?php echo WEB_PATH. '/template/detail/'.$template->id ?>">Read More</a></p>
+              </div><!-- end card-body -->
+              <div class="card-footer">
+                <ul class="list-inline filters">
+                  <li><a  href="#none"> <?php if($template->title == 'igirlxinhcom') {print 'Hot girl';} else {print "Hot Girl New";} ?></a></li>
+                  <li><a  href="#none">Art</a></li>
+                </ul>
+              </div><!-- end card-footer -->
+            </div><!-- end card -->
+      <?php //}
+       endforeach; ?>   
+         
+      
+            
+            
+            <?php /*?>
+            <div class="card music social">
+              <a  href="#" class="thumb">
+                <img src="<?php echo $basepathview; ?>img/sample/elephants-dream/sample-elephants-1.jpg" alt="" title="" />
+                <span class="overlay"><span class="fa fa-search"></span></span>
+              </a>
+              <div class="card-body">
+                <h2><a  href="#">Elephants Dream</a></h2>
+                <p>Elephants Dream is the world’s first open movie, made entirely with open source graphics software such as Blender , and with all production ...</p>
+                <p><a  href="#">Read More</a></p>
+              </div><!-- end card-body -->
+              <div class="card-footer">
+                <ul class="list-inline filters">
+                  <li><a  href="#none">Music</a></li>
+                  <li><a  href="#none">Social</a></li>
+                </ul>
+              </div><!-- end card-footer -->
+            </div><!-- end card -->
+            
+            */?>
+     
+  </div><!-- end portfolio-wrapper -->
+  
+   <?php
+   echo $this->paginationControl(
+           $paginator, 'Sliding', 'page-template', array('order_by' => $order_by, 'order' => $order , 'search_by' => $search_by, 'pageAction' => $pageAction)
+   );
+
+
+    ?>     

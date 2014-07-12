@@ -1,0 +1,54 @@
+<h1>List User Manager</h1>
+<div id="body">
+	<div class="add">
+	<?php 
+		$lnkAdd = $this->url('admin',
+					array(
+							'controller'=>'index',
+							'action'=>'add'
+					));
+		$lnkAdd = '<a href="' . $lnkAdd . '">Add a New User</a>';
+		echo $lnkAdd;
+	?>
+	</div>
+	<table id='data'>
+		<tr class="title">
+			<td>STT</td>
+			<td>Username</td>	
+			<td>Email</td>
+			<td>display_name</td>
+			<td>Control</td>
+		</tr>
+		<?php 
+			foreach ($this->users as $user){
+				
+				$lnkEdit = $this->url('admin', 
+										array(
+											 'controller'=>'index',
+											 'action'=>'edit', 
+											 'id' => $user->user_id
+										));
+				$lnkEdit = '<a href="' . $lnkEdit . '">Edit</a>';
+				
+				$lnkDelete 	= $this->url('admin',
+								array(
+										'controller'=>'index',
+										'action'=>'delete',
+										'id' => $user->user_id
+								));
+				$lnkDelete = '<a href="' . $lnkDelete . '">Delete</a>';
+				
+				$str = '';
+				$str .= '<tr>';
+				$str .= '<td class="txtCenter">' . $user->user_id . '</td>';
+				$str .= '<td><b>' . $user->username . '</b></td>';
+				$str .= '<td class="txtCenter">' . $user->email . '</td>';
+				$str .= '<td class="txtCenter">' . $user->display_name . '</td>';
+				$str .= '<td class="txtCenter">' . $lnkEdit . ' | ' . $lnkDelete .'</td>';
+				$str .= '</tr>'; 
+				echo $str;
+		 
+			} 
+		?>
+	</table>
+</div>

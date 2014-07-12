@@ -1,0 +1,36 @@
+<?php 
+$title = 'Hot girl';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<p><a class="btn  btn-mini  " href="<?php echo $this->url('igirlxinhcom', array( 
+        'action'=>'add'));?>">Add new </a></p>
+
+<table class="table">
+<tr>
+    <th>STT</th>
+    <th>Name</th>
+    <th>Title</th>
+     <th>Thumbnail</th>
+    <th>&nbsp;</th>
+</tr>
+<?php foreach($paginator as $igirlxinhcom) : //if($igirlxinhcom->image_thumbnail != '') {?>
+<tr>
+    <td><?php echo $igirlxinhcom->id;?></td>
+    <td><?php echo $this->escapeHtml($igirlxinhcom->title);?></td>
+    <td><?php echo $this->escapeHtml($igirlxinhcom->content_detail);?></td>
+    <td><?php if($igirlxinhcom->image_thumbnail != '') { ?> <img src="<?php echo $this->escapeHtml($igirlxinhcom->image_thumbnail); ?>" style="width: 200px; height:200px;"/><?php } else { ?><img src="<?php echo Page_Bottom_Issus_img; ?>/img/sample/elephants-dream/imgdefault.jpg" alt="" title="" /><?php }?></td>
+    <td>
+        <a class="btn  btn-mini  " href="<?php echo WEB_PATH ?>/igirlxinhcom/edit/<?php echo $igirlxinhcom->id?>">Edit</a>
+        <a class="btn  btn-mini  " href="<?php echo WEB_PATH ?>/igirlxinhcom/delete/<?php echo $igirlxinhcom->id?>">Delete</a>
+        <a class="btn  btn-mini  " href="<?php echo WEB_PATH ?>/igirlxinhcom/readdetail/<?php echo $igirlxinhcom->id?>">Read <?php echo $igirlxinhcom->title?> </a>
+    </td>
+</tr>
+<?php //} 
+   endforeach; ?>
+</table>
+<?php 
+echo $this->paginationControl(
+            $paginator, 'Sliding', 'paginatorhotgirl', array('order_by' => $order_by, 'order' => $order)
+    );
+?>

@@ -1,0 +1,102 @@
+<?php
+$title = 'My mgvndetail';
+$this->headTitle($title);
+$url_order = 'ASC';
+if ($order_by == 'title')
+    $url_order = $order == 'ASC' ? 'DESC' : 'ASC';
+elseif ($order_by == 'description')
+    $url_order = $order == 'ASC' ? 'DESC' : 'ASC';
+?>
+
+<?php
+$form  = $this->form;
+$form->setAttribute('action', $this->url('mgvndetail', array('action' => 'search')));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+foreach ($form as $element) :
+    ?>
+    <div class="control-group <?php if ($this->formElementErrors($element)) echo "error" ?>">
+        <label class="control-label"><?php echo $element->getLabel() ?></label>
+        <div class="controls">
+            <?php
+            echo $this->formElement($element);
+            if ($this->formElementErrors($element)):
+                ?>
+                <span class="help-inline"><?php echo $this->formElementErrors($element); ?></span>
+                <?php
+            endif;
+            ?>
+        </div>
+    </div>
+    <?php
+endforeach;
+echo $this->form()->closeTag();
+?>
+
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<p><a class="btn "  href="<?php
+echo $this->url('mgvndetail', array( 'action' => 'add'));
+?>">Add new mgvndetail</a></p>
+
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            <a href="<?php echo $this->url('mgvndetail', array('order_by' => 'title', 'order' => $url_order, 'search_by' => $search_by)); ?>">Title <?php if ($order_by == 'title'): ?><i class="icon-chevron-<?php echo $url_order == 'ASC' ? 'down' : 'up' ?>"></i><?php endif; ?></a>
+        </th>
+        <th>
+            <a href="<?php echo $this->url('mgvndetail', array('order_by' => 'description', 'order' => $url_order, 'search_by' => $search_by)); ?>">description <?php if ($order_by == 'description'): ?><i class="icon-chevron-<?php echo $url_order == 'ASC' ? 'down' : 'up' ?>"></i><?php endif; ?></a>
+        </th>
+        <th>
+            <a href="<?php echo $this->url('mgvndetail', array('order_by' => 'img', 'order' => $url_order, 'search_by' => $search_by)); ?>">Thumbnail <?php if ($order_by == 'img'): ?><i class="icon-chevron-<?php echo $url_order == 'ASC' ? 'down' : 'up' ?>"></i><?php endif; ?></a>
+        </th>
+         <th>
+            <a href="<?php echo $this->url('mgvndetail', array('order_by' => 'page', 'order' => $url_order,'search_by' => $search_by)); ?>">Page <?php if ($order_by == 'page'): ?><i class="icon-chevron-<?php echo $url_order == 'ASC' ? 'down' : 'up' ?>"></i><?php endif; ?></a>
+        </th>
+        
+        <th><a href="">Action</a></th>
+    </tr>
+    <?php foreach ($paginatorimg as $mgvndetail) : ?>
+        <tr>
+            <td><?php echo $this->escapeHtml($mgvndetail->title); ?></td>
+            <td><div><?php echo $mgvndetail->description; ?></div></td>                 
+            <td> <div id="thumbnail" > <img  src="<?php echo WEB_PATH_IMG.'/';?><?php echo $this->escapeHtml($mgvndetail->img); ?>" style="width: 100px; height:100px;"/><p id="large"></p></div></td>
+            <td><?php if($mgvndetail->page !== '') { ?><div>Page : <?php echo $mgvndetail->page; ?></div><?php }?></td>
+            
+            <td>
+            <!--  
+                <a class="btn " href="<?php echo $this->url('mgvndetail', array('action' => 'edit', 'id' => $mgvndetail->id));
+        ?>">Edit</a> 
+            -->
+                <a class="btn" href="<?php echo $this->url('mgvndetail', array('action' => 'delete', 'id' => $mgvndetail->id));
+        ?>">Delete</a>
+              
+                  <?php
+                    $delurl = $this->url('mgvndetail', array (
+                        'action' => 'delete',
+                        'id'     => $mgvndetail->id,
+                    ));
+                    ?>
+                <!--    <div style="display: none;">
+                        <form action="<?php echo $delurl; ?>" method="post" id="post_<?php echo $mgvndetail->id; ?>" name="post_<?php echo $mgvndetail->id; ?>">
+                            <input type="hidden" name="id" value="<?php echo (int) $mgvndetail->id; ?>" />
+                        </form>
+                    </div>
+                    <a onclick="if (confirm('Are you sure you want to delete <?php echo $mgvndetail->id; ?>?')) {document.<?php echo "post_" . $mgvndetail->id; ?>.submit();} event.returnValue = false; return false;" href="#" class="btn btn-mini edit-row">Delete</a>
+               -->  
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</table>
+
+
+<?php
+   echo $this->paginationControl(
+           $paginatorimg, 'Sliding', 'page-mgvndetail', array('order_by' => $order_by, 'order' => $order , 'search_by' => $search_by, 'pageAction' => $pageAction)
+   );
+
+
+    ?>

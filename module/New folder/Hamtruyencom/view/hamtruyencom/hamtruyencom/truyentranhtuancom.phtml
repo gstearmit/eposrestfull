@@ -1,0 +1,15 @@
+<div id="rss">
+<?php
+$arrayRss = $this->data['items'];
+
+foreach ($arrayRss as $key => $value)
+{?>
+<div class="entry">
+<h2 class="postTitle"> <a href="<?php echo $value['link'];?>"><?php echo $value['title']; ?></a> </h2>
+<!--  <em class="date">Sat, 14 Jun 2014 16:00:39 +0000</em> --> 
+  <p class="description"><?php echo $value['description']; ?></p>
+  <img src="<?php echo WEB_PATH_IMG.$value['image']?>" alt="image" style="width: 200px;height:200px;">
+     <a href="<?php echo $value['link'];?>" target="_blank">Read More &gt;&gt;</a>
+</div>
+<?php }?>
+</div>
